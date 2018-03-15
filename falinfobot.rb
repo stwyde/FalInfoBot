@@ -22,32 +22,27 @@ end
 =end
 
 bot.command :shipping do |event|
-  File.open("shipping_info.txt", "r").each do |line|
-    event << line
-  end
+  File.foreach("shipping_info.txt"){|line| event << line}
+
 end
 
 bot.command :current_buy do |event|
-  File.open("current_buy.txt", "r").each do |line|
-    event << line
-  end
+  File.foreach("current_buy.txt"){|line| event << line}
+
 end
 
 bot.command :info do |event|
-  File.open("triplehelix_info.txt", "r").each do |line|
-    event << line
-  end
+  File.foreach("triplehelix_info.txt"){|line| event << line}
 end
 
+
 bot.command :heroes do |event|
-  File.open("spacemarine_heroes.txt", "r").each do |line|
-    event << line
-  end
+  File.foreach("spacemarine_heroes.txt"){|line| event << line}
 end
 
 bot.command :pins do |event|
   #sends an image of "Read my Pins" by Madeleine Albright
-  event << "https://videos.gannett-cdn.com/ventura/images/5049773640001/201703/541/5049773640001_5378260859001_5378240668001-vs.jpg"
+  event.send_file(File.open('readThePins.jpg', 'r'), caption: "READ THE PINS")
 end
 
 bot.command :help do |event|
