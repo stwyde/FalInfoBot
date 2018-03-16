@@ -5,39 +5,41 @@ bot = Discordrb::Commands::CommandBot.new token: ENV['discord_api_key'], client_
 puts "This bot's invite URL is #{bot.invite_url}."
 puts 'Click on it to invite it to your server.'
 
-=begin
-bot.message(with_text: 'current deals?') do |event|
-  output_message = String.new("")
-  File.open()
-  event.respond "Current deals include buying items from Triplehelixgames.com!"
-end
-=end
-
-=begin
-bot.message(with_text: 'shipping') do |event|
-  File.open("shipping_info.txt", "r").each do |line|
-    event << line
-  end
-end
-=end
-
 bot.command :shipping do |event|
-  File.foreach("shipping_info.txt"){|line| event << line}
-
+  output = ""
+  File.foreach("shipping_info.txt"){|line|
+    output << "\n"
+    output << line
+  }
+  event.user.pm(output)
 end
 
 bot.command :current_buy do |event|
-  File.foreach("current_buy.txt"){|line| event << line}
-
+  output = ""
+  File.foreach("current_buy.txt"){|line|
+    output << "\n"
+    output << line
+  }
+  event.user.pm(output)
 end
 
 bot.command :info do |event|
-  File.foreach("triplehelix_info.txt"){|line| event << line}
+  output = ""
+  File.foreach("triplehelix_info.txt"){|line|
+    output << "\n"
+    output << line
+  }
+  event.user.pm(output)
 end
 
 
 bot.command :heroes do |event|
-  File.foreach("spacemarine_heroes.txt"){|line| event << line}
+  output = ""
+  File.foreach("spacemarine_heroes.txt"){|line|
+      output << "\n"
+      output << line
+  }
+  event.user.pm(output)
 end
 
 bot.command :pins do |event|
