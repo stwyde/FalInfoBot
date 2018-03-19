@@ -5,7 +5,7 @@ bot = Discordrb::Commands::CommandBot.new token: ENV['discord_api_key'], client_
 puts "This bot's invite URL is #{bot.invite_url}."
 puts 'Click on it to invite it to your server.'
 
-bot.command :shipping do |event|
+bot.command(:shipping, {channels: ['#fals_wonderful_wares']}) do |event|
   output = ""
   File.foreach("shipping_info.txt"){|line|
     output << "\n"
@@ -14,7 +14,7 @@ bot.command :shipping do |event|
   event.user.pm(output)
 end
 
-bot.command :current_buy do |event|
+bot.command(:current_buy, {channels: ['#fals_wonderful_wares']}) do |event|
   output = ""
   File.foreach("current_buy.txt"){|line|
     output << "\n"
@@ -23,7 +23,7 @@ bot.command :current_buy do |event|
   event.user.pm(output)
 end
 
-bot.command :info do |event|
+bot.command(:info, {channels: ['#fals_wonderful_wares']}) do |event|
   output = ""
   File.foreach("triplehelix_info.txt"){|line|
     output << "\n"
@@ -33,7 +33,7 @@ bot.command :info do |event|
 end
 
 
-bot.command :heroes do |event|
+bot.command(:heroes, {channels: ['#fals_wonderful_wares']}) do |event|
   output = ""
   File.foreach("spacemarine_heroes.txt"){|line|
       output << "\n"
@@ -42,12 +42,12 @@ bot.command :heroes do |event|
   event.user.pm(output)
 end
 
-bot.command :pins do |event|
+bot.command(:pins, {channels: ['#fals_wonderful_wares']}) do |event|
   #sends an image of "Read my Pins" by Madeleine Albright
   event.send_file(File.open('readThePins.jpg', 'r'), caption: "READ THE PINS")
 end
 
-bot.command :help do |event|
+bot.command(:help, {channels: ['#fals_wonderful_wares']}) do |event|
   event << "~info to get information on the group buy process"
   event << "~current_buy to get specific information about current deals and splits for the next buy!"
   event << "~shipping to get information about shipping"
