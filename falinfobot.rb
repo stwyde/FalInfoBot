@@ -5,6 +5,27 @@ bot = Discordrb::Commands::CommandBot.new token: ENV['discord_api_key'], client_
 puts "This bot's invite URL is #{bot.invite_url}."
 puts 'Click on it to invite it to your server.'
 
+subbed_users = Array.new
+
+bot.command(:subscribe, {channels: ['#fals-wonderful-wares']})  do |event|
+  subbed_users << event.user
+  event.user.pm("You have now subscribed to Fal's Group Buy posts! When additional information is made available, you'll be PMed.")
+end
+
+bot.command(:unsubscribe, {channels: ['#fals-wonderful-wares']}) do |event|
+  subbed_users.delete(event.user)
+  event.user.pm("You are now unsubscribed.")
+end
+
+#sends out a PM to everyone subscribed
+bot.command(:alert, {channels: ['#fals-wonderful-wares'], required_roles: ["Really fuckin' good boi, bearer of the thrice blessed voice, seller of plastic crack"]}) do |event|
+  message = event.message
+  for subscriber in subbed_users:
+    subscriber.pm(message)
+  end
+  event << "Subscribers have been PMed"
+end
+
 bot.command(:shipping, {channels: ['#fals-wonderful-wares']}) do |event|
   output = ""
   File.foreach("shipping_info.txt"){|line|
@@ -53,6 +74,8 @@ bot.command(:help, {channels: ['#fals-wonderful-wares']}) do |event|
   event << "~heroes to get information about the Space Marine Heroes lineup exclusive to Japan!"
   event << "~pins to remind people to read the freakin' pins"
 end
+
+
 
 =begin
 Testing a pinner which should be called in to pin a message by a user in Trade_chat, and then unpin
