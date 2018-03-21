@@ -32,7 +32,6 @@ bot.command(:info, {channels: ['#fals_wonderful_wares']}) do |event|
   event.user.pm(output)
 end
 
-
 bot.command(:heroes, {channels: ['#fals_wonderful_wares']}) do |event|
   output = ""
   File.foreach("spacemarine_heroes.txt"){|line|
@@ -54,6 +53,7 @@ bot.command(:help, {channels: ['#fals_wonderful_wares']}) do |event|
   event << "~heroes to get information about the Space Marine Heroes lineup exclusive to Japan!"
   event << "~pins to remind people to read the freakin' pins"
 end
+
 bot.message(with_text: '')
 
 bot.run
