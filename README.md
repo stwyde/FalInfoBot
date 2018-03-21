@@ -4,6 +4,8 @@ Quick and dirty Ruby based Discord bot that provides information to people askin
 
 This bot serves a VERY simple purpose. Users can ask the bot for information, and then the bot will send that information to them via PM.
 
+Currently this bot's main version is hosted on an Amazon Web Services t2.micro. You can use your own bot's clientId and token to host a version of this bot on your own computer!
+
 **Software dependencies:**
 
 * discordrb
@@ -28,4 +30,4 @@ This bot serves a VERY simple purpose. Users can ask the bot for information, an
 
 Current future directions for this bot include allowing people to call the bot to PM someone else. This would allow Fal or someone else to simply type in "~info @personWhoDoesntReadPins" and have the bot then PM @personWhoDoesntReadPins the information given. 
 
-Additional work on pinning and unpinning messages automatically (namely for Trade_chat) would also hopefully be implemented soon. This would allow users to pin their own messages to trade chat, but would also unpin their prior posts in trade_chat as well.  
+Additional work on pinning and unpinning messages automatically (namely for trade_chat) would also hopefully be implemented soon. This would allow users to pin their own messages to trade chat, but would also unpin their prior posts in trade_chat as well. 
