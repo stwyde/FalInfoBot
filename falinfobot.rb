@@ -17,10 +17,15 @@ bot.command(:unsubscribe, {channels: ['#fals-wonderful-wares']}) do |event|
   event.user.pm("You are now unsubscribed.")
 end
 
+#todo, fix role logic in order to prevent invalid role errors.
+bot.command(:subscribers_list, {required_roles: ["Really fuckin' good boi, bearer of the thrice blessed voice, seller of plastic crack"]}) do |event|
+  event.user.pm(subbed_users)
+end
+
 #sends out a PM to everyone subscribed
 bot.command(:alert, {channels: ['#fals-wonderful-wares'], required_roles: ["Really fuckin' good boi, bearer of the thrice blessed voice, seller of plastic crack"]}) do |event|
   message = event.message
-  for subscriber in subbed_users:
+  subbed_users.each do |subscriber|
     subscriber.pm(message)
   end
   event << "Subscribers have been PMed"
@@ -32,7 +37,15 @@ bot.command(:shipping, {channels: ['#fals-wonderful-wares']}) do |event|
     output << "\n"
     output << line
   }
-  event.user.pm(output)
+  users_mentioned = []
+  users_mentioned.replace(event.message.mentions)
+  if users_mentioned.empty?
+    event.user.pm(output)
+  end
+  #todo: bug hunt! This for loop is finnicky. Each time it's iterated, the bot posts the user info publicly. weird.
+  for mentioned_user in users_mentioned
+    mentioned_user.pm(output)
+  end
 end
 
 bot.command(:current_buy, {channels: ['#fals-wonderful-wares']}) do |event|
@@ -41,7 +54,16 @@ bot.command(:current_buy, {channels: ['#fals-wonderful-wares']}) do |event|
     output << "\n"
     output << line
   }
-  event.user.pm(output)
+
+  users_mentioned = []
+  users_mentioned.replace(event.message.mentions)
+  if users_mentioned.empty?
+    event.user.pm(output)
+  end
+  #todo: bug hunt! This for loop is finnicky. Each time it's iterated, the bot posts the user info publicly. weird.
+  for mentioned_user in users_mentioned
+    mentioned_user.pm(output)
+  end
 end
 
 bot.command(:info, {channels: ['#fals-wonderful-wares']}) do |event|
@@ -50,7 +72,15 @@ bot.command(:info, {channels: ['#fals-wonderful-wares']}) do |event|
     output << "\n"
     output << line
   }
-  event.user.pm(output)
+  users_mentioned = []
+  users_mentioned.replace(event.message.mentions)
+  if users_mentioned.empty?
+    event.user.pm(output)
+  end
+  #todo: bug hunt! This for loop is finnicky. Each time it's iterated, the bot posts the user info publicly. weird.
+  for mentioned_user in users_mentioned
+    mentioned_user.pm(output)
+  end
 end
 
 bot.command(:heroes, {channels: ['#fals-wonderful-wares']}) do |event|
@@ -59,7 +89,15 @@ bot.command(:heroes, {channels: ['#fals-wonderful-wares']}) do |event|
       output << "\n"
       output << line
   }
-  event.user.pm(output)
+  users_mentioned = []
+  users_mentioned.replace(event.message.mentions)
+  if users_mentioned.empty?
+    event.user.pm(output)
+  end
+  #todo: bug hunt! This for loop is finnicky. Each time it's iterated, the bot posts the user info publicly. weird.
+  for mentioned_user in users_mentioned
+    mentioned_user.pm(output)
+  end
 end
 
 bot.command(:pins, {channels: ['#fals-wonderful-wares']}) do |event|
@@ -76,16 +114,18 @@ bot.command(:help, {channels: ['#fals-wonderful-wares']}) do |event|
 end
 
 
-
-=begin
-Testing a pinner which should be called in to pin a message by a user in Trade_chat, and then unpin
-that user's oldest pinned message in the channel.
-bot.command(:pin_pls, {channels: ['#fals_wonderful_wares', '#trade_chat']}) do |event|
-  event.user.await do |new_message_event|
-    new_message = new_message_event.message
-
+#Testing a pinner which should be called in to pin a message by a user in Trade_chat, and then unpin
+#that user's oldest pinned message in the channel.
+# todo: test this command some more. ensure it works
+bot.command(:pin_pls, {channels: ['#trade_chat']}) do |event|
+  #first unpin the oldest message
+  pinned_messages = event.message.channel.pins
+  pinned_messages.each do |pinned|
+    if pinned.author == event.message.author
+      pinned.unpin
+    end
   end
+  event.message.pin
 end
-=end
 
 bot.run
