@@ -49,7 +49,7 @@ bot.command(:subscribe, {channels: ['#fals-wonderful-wares', '#fals-group-buys']
   event.user.pm(output)
 end
 
-bot.command(:pins, {channels: ['#fals-wonderful-wares']}) do |event|
+bot.command(:pins, {channels: ['#fals-wonderful-wares', '#fals-group-buys']}) do |event|
   #sends an image of "Read my Pins" by Madeleine Albright
   event.send_file(File.open('readThePins.jpg', 'r'), caption: "READ THE PINS")
 end
