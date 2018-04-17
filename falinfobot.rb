@@ -5,7 +5,7 @@ bot = Discordrb::Commands::CommandBot.new token: ENV['discord_api_key'], client_
 puts "This bot's invite URL is #{bot.invite_url}."
 puts 'Click on it to invite it to your server.'
 
-bot.command(:shipping, {channels: ['#fals-wonderful-wares']}) do |event|
+bot.command(:shipping, {channels: ['#fals-wonderful-wares', '#fals-group-buys']}) do |event|
   output = ""
   File.foreach("shipping_info.txt"){|line|
     output << "\n"
@@ -14,7 +14,7 @@ bot.command(:shipping, {channels: ['#fals-wonderful-wares']}) do |event|
   event.user.pm(output)
 end
 
-bot.command(:current_buy, {channels: ['#fals-wonderful-wares']}) do |event|
+bot.command(:current_buy, {channels: ['#fals-wonderful-wares', '#fals-group-buys']}) do |event|
   output = ""
   File.foreach("current_buy.txt"){|line|
     output << "\n"
@@ -23,7 +23,7 @@ bot.command(:current_buy, {channels: ['#fals-wonderful-wares']}) do |event|
   event.user.pm(output)
 end
 
-bot.command(:info, {channels: ['#fals-wonderful-wares']}) do |event|
+bot.command(:info, {channels: ['#fals-wonderful-wares', '#fals-group-buys']}) do |event|
   output = ""
   File.foreach("triplehelix_info.txt"){|line|
     output << "\n"
@@ -32,7 +32,7 @@ bot.command(:info, {channels: ['#fals-wonderful-wares']}) do |event|
   event.user.pm(output)
 end
 
-bot.command(:heroes, {channels: ['#fals-wonderful-wares']}) do |event|
+bot.command(:heroes, {channels: ['#fals-wonderful-wares', '#fals-group-buys']}) do |event|
   output = ""
   File.foreach("spacemarine_heroes.txt"){|line|
       output << "\n"
@@ -41,7 +41,7 @@ bot.command(:heroes, {channels: ['#fals-wonderful-wares']}) do |event|
   event.user.pm(output)
 end
 
-bot.command(:subscribe, {channels: ['#fals-wonderful-wares']}) do |event|
+bot.command(:subscribe, {channels: ['#fals-wonderful-wares', '#fals-group-buys']}) do |event|
   output = ""
   File.foreach("subscribe.txt"){|line|
     output << line
@@ -54,7 +54,7 @@ bot.command(:pins, {channels: ['#fals-wonderful-wares']}) do |event|
   event.send_file(File.open('readThePins.jpg', 'r'), caption: "READ THE PINS")
 end
 
-bot.command(:help, {channels: ['#fals-wonderful-wares']}) do |event|
+bot.command(:help, {channels: ['#fals-wonderful-wares', '#fals-group-buys']}) do |event|
   event << "~info to get information on the group buy process"
   event << "~current_buy to get specific information about current deals and splits for the next buy!"
   event << "~shipping to get information about shipping"
