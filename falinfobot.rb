@@ -41,6 +41,14 @@ bot.command(:heroes, {channels: ['#fals-wonderful-wares']}) do |event|
   event.user.pm(output)
 end
 
+bot.command(:subscribe, {channels: ['#fals-wonderful-wares']}) do |event|
+  output = ""
+  File.foreach("subscribe.txt"){|line|
+    output << line
+  }
+  event.user.pm(output)
+end
+
 bot.command(:pins, {channels: ['#fals-wonderful-wares']}) do |event|
   #sends an image of "Read my Pins" by Madeleine Albright
   event.send_file(File.open('readThePins.jpg', 'r'), caption: "READ THE PINS")
@@ -52,6 +60,7 @@ bot.command(:help, {channels: ['#fals-wonderful-wares']}) do |event|
   event << "~shipping to get information about shipping"
   event << "~heroes to get information about the Space Marine Heroes lineup exclusive to Japan!"
   event << "~pins to remind people to read the freakin' pins"
+  event << "~subscribe to figure out how to get subscribed to future events using the channel tags!"
 end
 
 =begin
