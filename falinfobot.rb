@@ -69,6 +69,7 @@ bot.command(:help, {channels: ['#fals-wonderful-wares', '#fals-group-buys']}) do
   event << "~heroes to get information about the Space Marine Heroes lineup exclusive to Japan!"
   event << "~pins to remind people to read the freakin' pins"
   event << "~subscribe to figure out how to get subscribed to future events using the channel tags!"
+  event << "~recast_eta to get an update on when to get your recast order!"
 end
 
 =begin
